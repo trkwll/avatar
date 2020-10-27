@@ -5,7 +5,7 @@ const svgExt = /\.svg$/
 const pngExt = /\.png$/
 const sizePat = /^\d+x\d+$/
 
-module.exports = (req, res) => {
+const generateAvatarFromUrl = (req, res) => {
   let { pathname, query } = url.parse(req.url, true)
   if (pathname === '/favicon.ico') {
     return ''
@@ -30,3 +30,22 @@ module.exports = (req, res) => {
   res.setHeader('Content-Type', 'image/png')
   return image.generatePNG(pathname.replace(pngExt, ''), query.size, height || '')
 }
+
+/**
+ *
+ * @param {Object} [params]
+ * @param {string} [params.username] -
+ * @param {string} [params.text] -
+ * @param {string} [params.width] -
+ * @param {string} [params.height] -
+ */
+const generateAvatar = async (params = {}) => {
+  // return image.generatePNGBuffer(params)
+  return image.generatePNGBuffer(params);
+};
+
+//generateAvatar({username:"mike.b",text:"M"})
+
+module.exports = {
+  generateAvatar,
+};

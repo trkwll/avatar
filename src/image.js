@@ -54,5 +54,23 @@ exports.generatePNG = function(username, width, height) {
   width = parseSize(width)
   height = parseSize(height)
   const svg = generateGradient(username, '', width, height)
-  return sharp(new Buffer(svg)).png()
+  return sharp(Buffer.from(svg)).png()
 }
+
+/**
+ *
+ * @param {Object} params
+ * @param {string} params.username -
+ * @param {string} params.text -
+ * @param {string} params.width -
+ * @param {string} params.height -
+ */
+exports.generatePNGBuffer = async (params) => {
+  const { username = "", text = "", } = params;
+  const width = parseSize(params.width);
+  const height = parseSize(params.height);
+  const svg = generateGradient(username, text, width, height);
+  // await sharp(Buffer.from(svg)).png().toFile('output.png')
+  return sharp(Buffer.from(svg)).png().toBuffer()
+};
+

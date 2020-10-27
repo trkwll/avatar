@@ -1,11 +1,15 @@
 {
-  "name": "avatar",
+  "name": "@trkwll/avatar",
   "version": "1.0.0",
   "main": "src/index.js",
-  "repository": "tobiaslins/avatar",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/trkwll/avatar.git"
+  },
   "scripts": {
     "start": "NODE_ENV=production micro -p ${PORT:-3000}",
-    "dev": "micro-dev"
+    "dev": "micro-dev",
+    "test-run": "node src/index.js"
   },
   "author": "Tobias Lins <tobias@lins.in>",
   "license": "MIT",
