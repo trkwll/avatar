@@ -30,7 +30,7 @@ function generateGradient(username, text, width, height) {
   avatar = avatar.replace(/(\$HEIGHT)/g, height)
 
   avatar = avatar.replace(/(\$TEXT)/g, text)
-  avatar = avatar.replace(/(\$FONTSIZE)/g, (height * 0.9) / text.length)
+  avatar = avatar.replace(/(\$FONTSIZE)/g, (height * 0.7) / text.length)
 
 
   return avatar
