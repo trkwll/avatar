@@ -6,10 +6,17 @@ const Color = require('color')
 const svg = require('./svg')
 const helper = require('./helper')
 
-function generateGradient(username, text, width, height) {
+function generateGradient(username, text, width, height, colors = undefined) {
   const hash = crypto.createHash('md5').update(username).digest('hex')
 
   let firstColor = helper.hashStringToColor(hash)
+  let secondColor
+
+  if (Array.isArray(colors)) {
+    firstColor = colors[0]
+    secondColor = colors[1]
+  }
+
   firstColor = new Color(firstColor).saturate(0.5)
 
   const lightning = firstColor.hsl().color[2]
@@ -24,7 +31,7 @@ function generateGradient(username, text, width, height) {
   }
 
   let avatar = svg.replace('$FIRST', firstColor.hex())
-  avatar = avatar.replace('$SECOND', helper.getMatchingColor(firstColor).hex())
+  avatar = avatar.replace('$SECOND', secondColor || helper.getMatchingColor(firstColor).hex())
 
   avatar = avatar.replace(/(\$WIDTH)/g, width)
   avatar = avatar.replace(/(\$HEIGHT)/g, height)
@@ -64,13 +71,13 @@ exports.generatePNG = function(username, width, height) {
  * @param {string} params.text -
  * @param {string} params.width -
  * @param {string} params.height -
+ * @param {Array} params.colors -
  */
 exports.generatePNGBuffer = async (params) => {
   const { username = "", text = "", } = params;
   const width = parseSize(params.width);
   const height = parseSize(params.height);
   const svg = generateGradient(username, text, width, height);
-  // await sharp(Buffer.from(svg)).png().toFile('output.png')
   return sharp(Buffer.from(svg)).png().toBuffer()
 };
 
