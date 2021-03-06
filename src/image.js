@@ -28,9 +28,9 @@ function generateGradient(username, text, width, height, colors = undefined) {
     if (lightning > 75) {
       firstColor = firstColor.darken(0.4)
     }
-
-    firstColor = firstColor.hex()
+    
     secondColor = helper.getMatchingColor(firstColor).hex()
+    firstColor = firstColor.hex()
   }
 
   let avatar = svg.replace('$FIRST', firstColor)
