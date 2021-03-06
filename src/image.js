@@ -74,10 +74,10 @@ exports.generatePNG = function(username, width, height) {
  * @param {Array} params.colors -
  */
 exports.generatePNGBuffer = async (params) => {
-  const { username = "", text = "", } = params;
+  const { username = "", text = "", colors = undefined} = params;
   const width = parseSize(params.width);
   const height = parseSize(params.height);
-  const svg = generateGradient(username, text, width, height);
+  const svg = generateGradient(username, text, width, height, colors);
   return sharp(Buffer.from(svg)).png().toBuffer()
 };
 
