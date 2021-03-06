@@ -3,13 +3,16 @@ module.exports = `<?xml version="1.0" standalone="no"?>
 <svg width="$WIDTH" height="$HEIGHT" viewBox="0 0 $WIDTH $HEIGHT" version="1.1" xmlns="http://www.w3.org/2000/svg">
   <g>
     <defs>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap');
+      </style>
       <linearGradient id="avatar" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0%" stop-color="$FIRST"/>
         <stop offset="100%" stop-color="$SECOND"/>
       </linearGradient>
     </defs>
     <rect fill="url(#avatar)" x="0" y="0" width="$WIDTH" height="$HEIGHT"/>
-    <text x="50%" y="80%" alignment-baseline="central" dominant-baseline="central" text-anchor="middle" fill="#fff" font-family="sans-serif" font-size="$FONTSIZE">$TEXT</text>
+    <text x="50%" y="80%" alignment-baseline="central" dominant-baseline="central" text-anchor="middle" fill="#fff" font-family="'Nunito', sans-serif;" font-size="$FONTSIZE">$TEXT</text>
   </g>
 </svg>
 `
