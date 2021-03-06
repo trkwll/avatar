@@ -15,23 +15,26 @@ function generateGradient(username, text, width, height, colors = undefined) {
   if (Array.isArray(colors)) {
     firstColor = colors[0]
     secondColor = colors[1]
+  } else {
+    firstColor = new Color(firstColor).saturate(0.5)
+
+    const lightning = firstColor.hsl().color[2]
+    if (lightning < 25) {
+      firstColor = firstColor.lighten(3)
+    }
+    if (lightning > 25 && lightning < 40) {
+      firstColor = firstColor.lighten(0.8)
+    }
+    if (lightning > 75) {
+      firstColor = firstColor.darken(0.4)
+    }
+
+    firstColor = firstColor.hex()
+    secondColor = helper.getMatchingColor(firstColor).hex()
   }
 
-  firstColor = new Color(firstColor).saturate(0.5)
-
-  const lightning = firstColor.hsl().color[2]
-  if (lightning < 25) {
-    firstColor = firstColor.lighten(3)
-  }
-  if (lightning > 25 && lightning < 40) {
-    firstColor = firstColor.lighten(0.8)
-  }
-  if (lightning > 75) {
-    firstColor = firstColor.darken(0.4)
-  }
-
-  let avatar = svg.replace('$FIRST', firstColor.hex())
-  avatar = avatar.replace('$SECOND', secondColor || helper.getMatchingColor(firstColor).hex())
+  let avatar = svg.replace('$FIRST', firstColor)
+  avatar = avatar.replace('$SECOND', secondColor)
 
   avatar = avatar.replace(/(\$WIDTH)/g, width)
   avatar = avatar.replace(/(\$HEIGHT)/g, height)
