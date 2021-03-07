@@ -44,7 +44,7 @@ const generateAvatar = async (params = {}) => {
   return image.generatePNGBuffer(params);
 };
 
-generateAvatar({username:"mike.b",text:"M"})
+// generateAvatar({username:"mike.b",text:"M"})
 
 module.exports = {
   generateAvatar,
